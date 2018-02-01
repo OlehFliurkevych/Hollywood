@@ -1,7 +1,15 @@
 package ua.logos.hollywood.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +25,34 @@ public class Film extends BaseEntity{
 	@Column(name="release_year")
 	private int releaseYear;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="categoty_id")
+	private Category category;
 	
+	@ManyToMany
+	@JoinTable(name="actor_film",joinColumns=@JoinColumn(name="film_id"),inverseJoinColumns=@JoinColumn(name="actor_id"))
+	private List<Actor> actors=new ArrayList<>();
+		
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+
+
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+
 	public Film(){
 		
 	}

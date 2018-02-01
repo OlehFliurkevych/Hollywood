@@ -1,7 +1,11 @@
 package ua.logos.hollywood.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,6 +16,19 @@ public class Category extends BaseEntity{
 		
 	}
 	
+	@OneToMany(mappedBy="category")
+	private List<Film> films=new ArrayList<>();
+	
+	
+	
+	public List<Film> getFilms() {
+		return films;
+	}
+
+	public void setFilms(List<Film> films) {
+		this.films = films;
+	}
+
 	@Column(name="name")
 	private String name;
 

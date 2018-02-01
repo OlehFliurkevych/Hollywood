@@ -1,11 +1,20 @@
 package ua.logos.hollywood.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="actor")
 public class Actor extends BaseEntity{
 	
 	@Column(name="first_name")
@@ -21,6 +30,20 @@ public class Actor extends BaseEntity{
 
 	@Column(name="created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESPAM")
 	private Date creationDate;
+	
+	
+	@ManyToMany
+	@JoinTable(name="actor_film",joinColumns=@JoinColumn(name="actor_id"),inverseJoinColumns=@JoinColumn(name="film_id"))
+	private List<Film> films=new ArrayList<>();
+	
+
+	public List<Film> getFilms() {
+		return films;
+	}
+
+	public void setFilms(List<Film> films) {
+		this.films = films;
+	}
 
 	public Actor(){
 		
