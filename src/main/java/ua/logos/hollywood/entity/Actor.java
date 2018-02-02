@@ -28,7 +28,7 @@ public class Actor extends BaseEntity{
 	private Date dateOfBirth;
 	
 
-	@Column(name="created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESPAM")
+	@Column(name="created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date creationDate;
 	
 	
